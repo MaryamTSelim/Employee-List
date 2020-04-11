@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 namespace _01_Delegate_Menu
 {
-    delegate void printAll(List<Employee > listOfEmployees);
+    delegate void printAll(List<Employee> listOfEmployees);
     class Program
     {
         public static List<Employee> listOfEmployees = new List<Employee> { new Employee(1,"Maryam",1996) , new Employee(2,"Esraa", 1997)
@@ -12,64 +12,29 @@ namespace _01_Delegate_Menu
         {
             List<string> menuItems = new List<string> { "Print All Employees", "Print Employee By ID", "Add Employee"
                                                                , "Edit Employee", "Delete Employee", "Exit"};
-            
-            //ConsoleColor foreColor = ConsoleColor.White;
-            //ConsoleColor backColor = ConsoleColor.DarkGray;
-            //ConsoleColor hforeColor = ConsoleColor.Black;
-            //ConsoleColor hbackColor = ConsoleColor.White;
-            //Menu menu = new Menu(menuItems, foreColor, backColor, hforeColor, hbackColor, 5, 1, 0 );
-            Menu menu = new Menu(menuItems, HandleMenuEnter);
+
+            Menu menu = new Menu(menuItems, HandlePrintAll, HandlePrintByID, HandleGetID, HandleAdd, HandleEdit, HandleRemove);
             menu.Run();
 
             Console.WriteLine("\nPress Any Key To Exit");
             Console.ReadLine();
         }
-        static void HandleMenuEnter(object sender, MenuEventArgs e)
+
+        static void HandlePrintAll(object sender, MenuEventArgs e)
         {
-            Console.Clear();
-            Menu m = sender as Menu; 
-            switch (m.currentIndex)
-            {
-                case 0:
-                    printAll(listOfEmployees);
-                    break;
-                case 1:
-                    int printID = getID();
-                    printById(printID);
-                    break;
-                case 2:
-                    addEmployee();
-                    break;
-                case 3:
-                    int editID = getID();
-                    editEmployee(editID);
-                    break;
-                case 4:
-                    int deleteID = getID();
-                    deleteEmployee(deleteID);
-                    break;
-                default:
-                    e.ToContinue = false;
-                    return;
-            }
-            
-            Console.ReadLine();
-            e.ToContinue = true;
-        }
-        static void printAll(List<Employee> listOfEmployees)
-        {
-            foreach (var employee in listOfEmployees)
+            foreach (var employee in e.Employees)
             {
                 Console.WriteLine(employee);
             }
         }
-        static int getID()
+        static void HandleGetID(object sender, MenuEventArgs e)
         {
             Console.Clear();
             Console.Write("Enter ID :\t");
-            return Int32.Parse(Console.ReadLine());
+            e.ID = Int32.Parse(Console.ReadLine());
         }
-        static int printById(int id)
+
+        static void HandlePrintByID(object sender, MenuEventArgs e)
         {
             Console.Clear();
             int i = 0;
@@ -77,57 +42,71 @@ namespace _01_Delegate_Menu
             bool isPrinted = false;
             do
             {
-                if (listOfEmployees[i].Id == id)
+                if (listOfEmployees[i].Id == e.ID)
                 {
                     index = i;
                     Console.WriteLine(listOfEmployees[i]);
                     isPrinted = true;
                 }
                 i++;
-            } while (i<listOfEmployees.Count && !isPrinted);
-            return index ;
+            } while (i < listOfEmployees.Count && !isPrinted);
         }
-        static void addEmployee()
+        static void HandleAdd(object sender, MenuEventArgs e)
         {
             Console.Clear();
-            Console.Write("Name :\t");
-            string Name = Console.ReadLine();
-            Console.Write("BirthYear :\t");
-            int BirthYear = Int32.Parse(Console.ReadLine());
-            listOfEmployees.Add(new Employee(listOfEmployees.Count + 1,Name,BirthYear));
+            Console.Write("name :\t");
+            string name = Console.ReadLine();
+            Console.Write("birthyear :\t");
+            int birthyear = Int32.Parse(Console.ReadLine());
+            e.Employees.Add(new Employee(e.Employees.Count + 1, name, birthyear));
         }
-        static void deleteEmployee(int id)
+
+        static void HandleRemove(object sender, MenuEventArgs e)
         {
-            var index = printById(id);
-            if (index < 0)
+            Console.Clear();
+            int i = 0;
+            bool isFound = false;
+            do
             {
-                Console.WriteLine("No element Exists with this ID");
-            }
-            else
+                if (e.Employees[i].Id == e.ID)
+                {
+                    var rem = e.Employees[i];
+                    e.Employees.Remove(rem);
+                    Console.WriteLine($"{rem}\nis successfully removed");
+                    isFound = true;
+                }
+                i++;
+            } while (i < e.Employees.Count && !isFound);
+
+
+        }
+        static void HandleEdit(object sender, MenuEventArgs e)
+        {
+            Console.Clear();
+            int i = 0;
+            bool isFound = false;
+            do
             {
-                var rem = listOfEmployees[index];
-                listOfEmployees.Remove(rem);
-                Console.WriteLine("\nis successfully removed");
+                if (e.Employees[i].Id == e.ID)
+                {
+                    var rem = e.Employees[i];
+                    
+                    Console.WriteLine($"{rem}\n");
+                    Console.Write("Edited Name :\t");
+                    string name = Console.ReadLine();
+                    Console.Write("Edited Birth Year :\t");
+                    int birthyear = Int32.Parse(Console.ReadLine());
+                    e.Employees[i].Name = name;
+                    e.Employees[i].BirthYear = birthyear;
+                    isFound = true;
+                }
+                i++;
+            } while (i < e.Employees.Count && !isFound);
+
+
+               
                 
-            }
             
-        }
-        static void editEmployee(int id)
-        {
-            var index = printById(id);
-            if(index < 0)
-            {
-                Console.WriteLine("No element Exists with this ID");
-            }
-            else
-            {
-                Console.Write("Edited Name :\t");
-                string Name = Console.ReadLine();
-                Console.Write("Edited BirthYear :\t");
-                int BirthYear = Int32.Parse(Console.ReadLine());
-                listOfEmployees[index].Name = Name;
-                listOfEmployees[index].BirthYear = BirthYear;
-            }
         }
     }
 }
