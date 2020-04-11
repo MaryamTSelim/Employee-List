@@ -1,0 +1,11 @@
+D:\ITI\Advanced C#\01 Delegate Menu\01 Delegate Menu\bin\Debug\netcoreapp3.0\01 Delegate Menu.exe
+D:\ITI\Advanced C#\01 Delegate Menu\01 Delegate Menu\bin\Debug\netcoreapp3.0\01 Delegate Menu.deps.json
+D:\ITI\Advanced C#\01 Delegate Menu\01 Delegate Menu\bin\Debug\netcoreapp3.0\01 Delegate Menu.runtimeconfig.json
+D:\ITI\Advanced C#\01 Delegate Menu\01 Delegate Menu\bin\Debug\netcoreapp3.0\01 Delegate Menu.runtimeconfig.dev.json
+D:\ITI\Advanced C#\01 Delegate Menu\01 Delegate Menu\bin\Debug\netcoreapp3.0\01 Delegate Menu.dll
+D:\ITI\Advanced C#\01 Delegate Menu\01 Delegate Menu\bin\Debug\netcoreapp3.0\01 Delegate Menu.pdb
+D:\ITI\Advanced C#\01 Delegate Menu\01 Delegate Menu\obj\Debug\netcoreapp3.0\01 Delegate Menu.csprojAssemblyReference.cache
+D:\ITI\Advanced C#\01 Delegate Menu\01 Delegate Menu\obj\Debug\netcoreapp3.0\01 Delegate Menu.AssemblyInfoInputs.cache
+D:\ITI\Advanced C#\01 Delegate Menu\01 Delegate Menu\obj\Debug\netcoreapp3.0\01 Delegate Menu.AssemblyInfo.cs
+D:\ITI\Advanced C#\01 Delegate Menu\01 Delegate Menu\obj\Debug\netcoreapp3.0\01 Delegate Menu.dll
+D:\ITI\Advanced C#\01 Delegate Menu\01 Delegate Menu\obj\Debug\netcoreapp3.0\01 Delegate Menu.pdb
